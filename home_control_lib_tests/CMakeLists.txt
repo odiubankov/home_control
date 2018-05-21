@@ -11,4 +11,5 @@ file(GLOB ${PROJECT_NAME}_sources source/*.cpp)
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 
 target_link_libraries(${PROJECT_NAME} gtest gtest_main)
+target_link_libraries(${PROJECT_NAME} gmock)
 target_link_libraries(${PROJECT_NAME} home_control_lib)

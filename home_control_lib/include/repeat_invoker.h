@@ -1,11 +1,14 @@
+//
+// Copyright(c) 2018 Oleksii Diubankov
+// Distributed under the MIT License (http://opensource.org/licenses/MIT)
+//
 #pragma once
 
 #include <chrono>
 #include <functional>
 #include <thread>
 
-namespace hctrl
-{
+namespace hctrl {
 
 class RepeatInvoker
 {

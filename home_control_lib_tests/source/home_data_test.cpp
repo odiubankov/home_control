@@ -1,3 +1,7 @@
+//
+// Copyright(c) 2018 Oleksii Diubankov
+// Distributed under the MIT License (http://opensource.org/licenses/MIT)
+//
 #include "home_data.h"
 #include <gtest/gtest.h>
 
