@@ -4,8 +4,7 @@
 //
 #pragma once
 
-namespace hctrl
-{
+namespace hctrl {
 
 class HomeData
 {

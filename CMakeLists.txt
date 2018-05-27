@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.5.1)
-project (dht)
+project (home_control)
 
 set (HOME_CONTROL_SOURCE_DIR ${CMAKE_SOURCE_DIR})
 
