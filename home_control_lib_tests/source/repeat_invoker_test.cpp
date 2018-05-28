@@ -11,7 +11,7 @@
 TEST(RepeatInvoker, Invoke)
 {
     //Arrange
-    std::atomic<int> invokeTimesCnt;
+    std::atomic<int> invokeTimesCnt{0};
     hctrl::RepeatInvoker repeatInvoker{
         [&invokeTimesCnt] { ++invokeTimesCnt; },
         std::chrono::milliseconds{1} };
