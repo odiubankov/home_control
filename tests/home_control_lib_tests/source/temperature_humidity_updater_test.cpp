@@ -5,6 +5,7 @@
 #include "temperature_humidity_updater.h"
 #include "home_data.h"
 #include "itemperature_humidity_sensor.h"
+#include "ihome_data_json_builder.h"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -18,6 +19,12 @@ public:
     MOCK_METHOD0(update, void());
     MOCK_CONST_METHOD0(getTemperature, int());
     MOCK_CONST_METHOD0(getHumidity, unsigned());
+};
+
+class MockJsonBuilder : public hctrl::IHomeDataJsonBuilder
+{
+public:
+    MOCK_CONST_METHOD1(build, std::string(const hctrl::HomeData&));
 };
 
 }
@@ -38,10 +45,11 @@ TEST(TemperatureHumidityUpdater, Update)
         .WillOnce(Return(80));
 
     hctrl::HomeData homeData;
-    hctrl::TemperatureHumidityUpdater updater{sensor, homeData};
+    std::unique_ptr<MockJsonBuilder> mockJsonBuilder{ new MockJsonBuilder };
+    hctrl::TemperatureHumidityUpdater updater{sensor, homeData, std::move(mockJsonBuilder)};
 
     //Act
-    updater();
+    updater.update();
 
     //Assert
     ASSERT_EQ(10, homeData.getTemperature());
