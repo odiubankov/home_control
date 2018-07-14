@@ -8,6 +8,7 @@
 
 #include <thread>
 #include <chrono>
+#include <iostream>
 
 namespace hctrl {
 
@@ -24,12 +25,20 @@ public:
         const int READ_CNT = 10;
         int temperature = 0;
         unsigned humidity = 0;
-        for (int i = 0; i < READ_CNT; ++i)
+        for (int i = 0; i < READ_CNT;)
         {
-            sensorImpl_.read();
-            temperature += sensorImpl_.getTemperature();
-            humidity += sensorImpl_.getHumidity();
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            try
+            {
+                sensorImpl_.read();
+                temperature += sensorImpl_.getTemperature();
+                humidity += sensorImpl_.getHumidity();
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                ++i;
+            }
+            catch(const std::runtime_error& error)
+            {
+                std::cout << "Exception on reading: " << error.what() << std::endl;
+            }
         }
 
         temperature_ = temperature / READ_CNT;

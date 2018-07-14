@@ -4,16 +4,17 @@
 //
 #pragma once
 
-#include "ihome_data_json_builder.h"
+#include <string>
 
 namespace hctrl {
 
 class HomeData;
 
-class HomeDataJsonBuilder : public IHomeDataJsonBuilder
+class IHomeDataJsonBuilder
 {
 public:
-    std::string build(const HomeData& homeData) const override;
+    virtual ~IHomeDataJsonBuilder() {}
+    virtual std::string build(const HomeData& homeData) const = 0;
 };
 
 }

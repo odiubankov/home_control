@@ -1,0 +1,3 @@
+[submodule "home_control_app/dht_sensor"]
+	path = home_control_app/dht_sensor
+	url = git@github.com:odiubankov/dht_sensor.git
