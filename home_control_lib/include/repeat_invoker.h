@@ -4,13 +4,14 @@
 //
 #pragma once
 
+#include <atomic>
 #include <chrono>
 #include <functional>
 #include <thread>
 
 namespace hctrl {
 
-class RepeatInvoker
+class   RepeatInvoker
 {
 public:
     RepeatInvoker(std::function<void()> handler, std::chrono::milliseconds timeout);
