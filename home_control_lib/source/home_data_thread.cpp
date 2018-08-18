@@ -6,6 +6,7 @@
 
 #include <QtNetwork>
 
+
 namespace hctrl {
 
 HomeDataThread::HomeDataThread(
@@ -15,8 +16,7 @@ HomeDataThread::HomeDataThread(
     : QThread(parent)
     , socketDescriptor_(socketDescriptor)
     , text_(std::move(text))
-{
-}
+{}
 
 
 void HomeDataThread::run()
@@ -28,12 +28,7 @@ void HomeDataThread::run()
         return;
     }
 
-    QByteArray block;
-    QDataStream out(&block, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_0);
-    out << QString::fromStdString(text_);
-
-    tcpSocket.write(block);
+    tcpSocket.write(text_.c_str());
     tcpSocket.disconnectFromHost();
     tcpSocket.waitForDisconnected();
 }
