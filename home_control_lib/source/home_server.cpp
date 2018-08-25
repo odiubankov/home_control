@@ -19,9 +19,8 @@ HomeServer::HomeServer(
     , homeDataProvider_(std::move(homeDataProvider))
 {
     std::cout << "HomeServer construct" << std::endl;
-    if (!listen(QHostAddress::Any, 1234)) {
+    if (!listen(QHostAddress::Any, port)) {
         std::cout << "Can't listen "  << std::endl;
-        //TODO error handling
         close();
     }
 

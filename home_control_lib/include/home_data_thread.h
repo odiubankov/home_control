@@ -20,6 +20,7 @@ public:
             std::string text,
             QObject* parent);
 
+
     void run() override;
 
 signals:

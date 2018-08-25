@@ -4,37 +4,17 @@
 //
 #include "temperature_humidity_updater.h"
 #include "home_data.h"
-#include "itemperature_humidity_sensor.h"
-#include "ihome_data_json_builder.h"
+#include "mock_temperature_humidity_sensor.h"
+#include "mock_json_builder.h"
 
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
-
-
-namespace {
-
-class MockTemperatureHumiditySensor : public hctrl::ITemperatureHumiditySensor
-{
-public:
-    MOCK_METHOD0(update, void());
-    MOCK_CONST_METHOD0(getTemperature, int());
-    MOCK_CONST_METHOD0(getHumidity, unsigned());
-};
-
-class MockJsonBuilder : public hctrl::IHomeDataJsonBuilder
-{
-public:
-    MOCK_CONST_METHOD1(build, std::string(const hctrl::HomeData&));
-};
-
-}
 
 using ::testing::Return;
 
 TEST(TemperatureHumidityUpdater, Update)
 {
     //Arrange
-    MockTemperatureHumiditySensor sensor;
+    mocks::TemperatureHumiditySensor sensor;
     EXPECT_CALL(sensor, update())
         .Times(1);
     EXPECT_CALL(sensor, getTemperature())
@@ -45,7 +25,7 @@ TEST(TemperatureHumidityUpdater, Update)
         .WillOnce(Return(80));
 
     hctrl::HomeData homeData;
-    std::unique_ptr<MockJsonBuilder> mockJsonBuilder{ new MockJsonBuilder };
+    std::unique_ptr<mocks::JsonBuilder> mockJsonBuilder{ new mocks::JsonBuilder };
     hctrl::TemperatureHumidityUpdater updater{sensor, homeData, std::move(mockJsonBuilder)};
 
     //Act

@@ -3,35 +3,14 @@
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 //
 #include "temperature_humidity_sensor.h"
+#include "mock_sensor_impl.h"
+
 #include <gtest/gtest.h>
-
-
-namespace {
-
-class SensorImpl
-{
-public:
-    int getTemperature() const { return temperature_; }
-    unsigned getHumidity() const { return humidity_; }
-
-    void read()
-    {
-        ++humidity_;
-        ++temperature_;
-    }
-
-private:
-    int temperature_{-2};
-    unsigned humidity_{0};
-};
-
-}
-
 
 TEST(TemperatureHumiditySensor, UpdateCallsRead10TimesAndCalculatesTheAverage)
 {
     // Arrange
-    hctrl::TemperatureHumiditySensor<SensorImpl> sensor{SensorImpl{}};
+    hctrl::TemperatureHumiditySensor<mocks::SensorImpl> sensor{mocks::SensorImpl{}};
 
     //Act
     sensor.update();

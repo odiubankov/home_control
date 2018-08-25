@@ -9,8 +9,9 @@ find_package(GTest REQUIRED)
 
 include_directories(${HOME_CONTROL_SOURCE_DIR}/home_control_lib/include)
 include_directories(${GTEST_INCLUDE_DIRS})
+include_directories(mocks)
 
-file(GLOB ${PROJECT_NAME}_sources source/*.cpp)
+file(GLOB ${PROJECT_NAME}_sources source/*.cpp mocks/*.h)
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 
