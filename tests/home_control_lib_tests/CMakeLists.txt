@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5.1)
 project(home_control_lib_tests)
 
 set(CMAKE_CXX_STANDARD 11)
+set(GTEST_LANG_CXX11 1)
 
 find_package(Qt5Core REQUIRED)
 find_package(GTest REQUIRED)
